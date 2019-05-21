@@ -16,6 +16,15 @@ class SearchBar extends React.Component {
       "location": '',
       "sortBy": 'best_match'
     };
+    this.sortByOptions = {
+      "Best Match": "best_match",
+      "Highest Rated": "rating",
+      "Most Reviewed": "review_count"
+    };
+  }
+
+  getSortByClass(sortByOption) {
+    return this.sortBy === sortByOption ? 'active' : '';
   }
 
   renderSortByOptions() {
