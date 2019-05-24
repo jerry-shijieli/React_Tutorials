@@ -13,7 +13,7 @@ class App extends React.Component {
     this.state = {
       searchResults: [],//[{id: '1', name:'x', artist: 'y', album: 'z'}],
       playlistName: 'myplaylist',
-      playlistTracks: [{id: '2', name:'a', artist: 'b', album: 'c'}]
+      playlistTracks: []//[{id: '2', name:'a', artist: 'b', album: 'c'}]
     };
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
@@ -40,6 +40,15 @@ class App extends React.Component {
 
   savePlaylist() {
     const trackURIs = this.state.playlistTracks.map(track => track.uri);
+    Spotify.savePlaylist(this.playlistName, trackURIs)
+      .then(
+        () => {
+          this.setState({
+            playlistName: 'New Playlist',
+            playlistTracks: []
+          });
+        }
+      );
   }
 
   search(term) {
